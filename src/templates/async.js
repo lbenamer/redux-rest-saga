@@ -3,9 +3,8 @@ import {
   actionFactory,
   sagaFactory,
   reducerFactory,
-  httpFactory,
   selectorFactory,
-  exposedActionFactory,
+  httpFactory,
 } from "../factories";
 
 export const asyncTemplate = (actionName, nameSpace, request, reducerPath) => {
@@ -15,6 +14,7 @@ export const asyncTemplate = (actionName, nameSpace, request, reducerPath) => {
     "success",
     "failed",
   ]);
+
   /* Reducer */
   const reducer = {
     data: {
@@ -44,8 +44,10 @@ export const asyncTemplate = (actionName, nameSpace, request, reducerPath) => {
     },
   };
   const asyncReducer = reducerFactory(reducer);
+
   /* Selectors  */
   const asyncSelector = selectorFactory(Object.keys(reducer), reducerPath);
+
   /* Http Saga */
   const httpConfig = {
     method: "get",

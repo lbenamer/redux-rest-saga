@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Redux Pattern Middleware Factory ",
   "main": "./src/index.js",
+  "browser": "./src/index.js",
   "scripts": {
     "test": "npm test"
   },

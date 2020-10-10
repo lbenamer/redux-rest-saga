@@ -1,10 +1,9 @@
 import { call, put, select } from "redux-saga/effects";
 import {
   actionFactory,
-  sagaFactory,
   reducerFactory,
   selectorFactory,
-  exposedActionFactory,
+  sagaFactory,
   httpFactory,
 } from "../factories";
 
@@ -32,7 +31,7 @@ RequestType = {
 }
 */
 
-const fetchTemplate = (nameSpace, request, reducerPath) => {
+export const fetchTemplate = (nameSpace, request, reducerPath) => {
   /* Actions */
   const fetchAction = actionFactory(nameSpace, "fetch", [
     "start",

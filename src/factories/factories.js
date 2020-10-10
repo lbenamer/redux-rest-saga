@@ -42,24 +42,28 @@ export const selectorFactory = (keys, path) => {
  }, {});
 
  return selectors;
-  /* Saga */
-export const sagaFactory = (actionType, saga) => {
-  const actionSaga = actionSagaGenerator(saga);
-  return sagaGenerator(actionType, actionSaga);
 };
+
+/* Saga */
+export const sagaFactory = (actionType, saga) => {
+const actionSaga = actionSagaGenerator(saga);
+return sagaGenerator(actionType, actionSaga);
 };
   /* Http */
+const httpErrorParser = (error) => ({
+  message: error.message,
+  log: JSON.parse(JSON.stringify(error)),
+});
+
 export const httpFactory = (request) => ({
   request: request.request || httpRequestGenerator(request),
   parser: request.parser && typeof request.parser === 'function' ?
     request.parser : httpParserGenerator(request.parser),
   serializer: request.serializer && typeof request.serializer === 'function' ?
     request.serializer : httpSerializerGenerator(request.serializer),
-  errorParser:  request.errorParser || (error) => ({
-    message: error.message,
-    log: JSON.parse(JSON.stringify(error)),
-  });
+  errorParser: request.errorParser || httpErrorParser,
 });
+
 
 // DEPRECATED ??
 export const exposedActionFactory = ({ id, params, body }, event) =>
