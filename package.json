@@ -6,6 +6,11 @@
   "scripts": {
     "test": "npm test"
   },
+  "dependencies": {
+    "axios": "0.20.0",
+    "redux": "4.0.5",
+    "redux-saga": "1.1.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lbenamer/redux-rest-saga.git"
