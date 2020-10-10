@@ -20,7 +20,6 @@ export const asyncTemplate = (actionName, nameSpace, request, reducerPath) => {
     data: {
       condition: (type) => type === asyncAction.success.type,
       mutation: (state, action) => action.data,
-      init: {}, // example
     },
     error: {
       condition: (type) => true,
