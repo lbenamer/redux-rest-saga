@@ -1,0 +1,26 @@
+{
+  "name": "redux-rest-saga",
+  "version": "0.0.1",
+  "description": "Redux Pattern Middleware Factory ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbenamer/redux-rest-saga.git"
+  },
+  "keywords": [
+    "redux",
+    "saga",
+    "middleware",
+    "factory",
+    "http"
+  ],
+  "author": "lbenamer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lbenamer/redux-rest-saga/issues"
+  },
+  "homepage": "https://github.com/lbenamer/redux-rest-saga#readme"
+}

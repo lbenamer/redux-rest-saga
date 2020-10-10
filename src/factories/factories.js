@@ -1,0 +1,72 @@
+import { combineReducers } from "redux";
+
+import {
+  actionGenerator,
+  sagaGenerator,
+  actionSagaGenerator,
+  reducerGenerator,
+  selectorGenerator,
+  httpParserGenerator,
+  httpSerializerGenerator,
+  httpRequestGenerator,
+} from "../generators";
+
+/* Actions */
+export const actionFactory = (nameSpace, actionName, cycles) => {
+  const actions = {};
+  cycles.forEach((cycle) => {
+    const [action, actionType] = actionGenerator(nameSpace, actionName, cycle);
+    actions[cycle] = {
+      event: action,
+      type: actionType
+    };
+  });
+  return actions;
+};
+
+/* Reducer */
+export const reducerFactory = (store) => {
+  const reducer = {};
+  Object.entries(store).forEach(([state, { condition, mutation, init }]) => {
+    reducer[state] = reducerGenerator(condition, mutation, init);
+  });
+
+  return combineReducers(reducer);
+};
+
+/* Selectors  */
+export const selectorFactory = (keys, path) => {
+ const selectors = keys.reduce((obj, key) => {
+   obj[key] = selectorGenerator(key, path);
+   return obj;
+ }, {});
+
+ return selectors;
+  /* Saga */
+export const sagaFactory = (actionType, saga) => {
+  const actionSaga = actionSagaGenerator(saga);
+  return sagaGenerator(actionType, actionSaga);
+};
+};
+  /* Http */
+export const httpFactory = (request) => ({
+  request: request.request || httpRequestGenerator(request),
+  parser: request.parser && typeof request.parser === 'function' ?
+    request.parser : httpParserGenerator(request.parser),
+  serializer: request.serializer && typeof request.serializer === 'function' ?
+    request.serializer : httpSerializerGenerator(request.serializer),
+  errorParser:  request.errorParser || (error) => ({
+    message: error.message,
+    log: JSON.parse(JSON.stringify(error)),
+  });
+});
+
+// DEPRECATED ??
+export const exposedActionFactory = ({ id, params, body }, event) =>
+  event({
+    payload: {
+      ...(id && { id }),
+      ...(params && { params }),
+      ...(body & { body })
+    }
+  });
