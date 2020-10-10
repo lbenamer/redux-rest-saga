@@ -5,6 +5,7 @@ import {
   reducerFactory,
   selectorFactory,
   exposedActionFactory,
+  httpFactory,
 } from "../factories";
 
 /*  request def
