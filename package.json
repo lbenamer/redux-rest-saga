@@ -1,6 +1,6 @@
 {
   "name": "redux-rest-saga",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Redux Pattern Middleware Factory ",
   "main": "./src/index.js",
   "browser": "./src/index.js",
