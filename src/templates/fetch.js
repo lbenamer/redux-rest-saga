@@ -33,7 +33,7 @@ RequestType = {
 
 export const fetchTemplate = (nameSpace, request, reducerPath) => {
   /* Actions */
-  const fetchAction = actionFactory(nameSpace, "fetch", [
+  const fetchAction = actionFactory("fetch", nameSpace, [
     "start",
     "success",
     "failed",

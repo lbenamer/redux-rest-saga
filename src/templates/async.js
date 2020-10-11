@@ -9,7 +9,7 @@ import {
 
 export const asyncTemplate = (actionName, nameSpace, request, reducerPath) => {
   /* Actions */
-  const asyncAction = actionFactory(nameSpace, actionName, [
+  const asyncAction = actionFactory(actionName, nameSpace, [
     "start",
     "success",
     "failed",

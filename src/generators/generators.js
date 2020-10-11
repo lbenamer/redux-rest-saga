@@ -2,7 +2,7 @@ import axios from "axios";
 import { put, takeEvery, call, all, fork } from "redux-saga/effects";
 
 /* Actions */
-export const actionTypeGenerator = (nameSpace, actionName, status) => {
+export const actionTypeGenerator = (actionName, nameSpace, status) => {
   const actionType = `${actionName.toUpperCase()}_${nameSpace.toUpperCase()}`;
   return status ? actionType + `_${status.toUpperCase()}` : actionType;
 };
@@ -12,8 +12,8 @@ export const actionFnGenerator = (actionType) => (actionParams) => ({
   ...actionParams,
 });
 
-export const actionGenerator = (nameSpace, actionName, status) => {
-  const actionType = actionTypeGenerator(nameSpace, actionName, status);
+export const actionGenerator = (actionName, nameSpace, status) => {
+  const actionType = actionTypeGenerator(actionName, nameSpace, status);
   const actionFn = actionFnGenerator(actionType);
   return [actionFn, actionType];
 };
@@ -29,7 +29,7 @@ export const selectorGenerator = (field, path) => (state) => {
   const fullPath = path ? `${path}.${field}` : field;
   return fullPath
     .split(".")
-    .reduce((acc, curr) => (acc ? acc[curr] : null), state);
+    .reduce((acc, curr) => (acc && acc[curr] ? acc[curr] : null), state);
 };
 
 /* Saga */
@@ -44,7 +44,7 @@ export const sagaGenerator = (actionType, actionSaga, sagaEffect = takeEvery) =>
   };
 
 /* Http */
-export const httpRequestGenerator = (request) => ({ id, params, body }) =>
+export const httpRequestGenerator = (request) => ({ id, params, body } = {}) =>
   axios({
     url: id || id === 0 ? `${request.url}/${id}` : request.url,
     method: request.method,
@@ -71,6 +71,7 @@ export const serializerGenerator = (serializer) => (payload) =>
 
 export const httpSerializerGenerator = (serializer = {}) => (payload) =>
   Object.entries(serializer).reduce((acc, [key, value]) => {
+    if(!payload) return payload;
     acc[key] = serializerGenerator(value)(payload[key]);
     return acc;
   }, payload);

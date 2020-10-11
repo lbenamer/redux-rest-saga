@@ -12,10 +12,10 @@ import {
 } from "../generators";
 
 /* Actions */
-export const actionFactory = (nameSpace, actionName, cycles) => {
+export const actionFactory = (actionName, nameSpace, cycles) => {
   const actions = {};
   cycles.forEach((cycle) => {
-    const [action, actionType] = actionGenerator(nameSpace, actionName, cycle);
+    const [action, actionType] = actionGenerator(actionName, nameSpace, cycle);
     actions[cycle] = {
       event: action,
       type: actionType
