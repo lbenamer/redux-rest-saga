@@ -182,7 +182,7 @@ describe("Generators Unit Testing", () => {
 
   describe('httpParserGenerator', () => {
     it('should generate parser function according to parser object', () => {
-      const parser = httpParserGenerator({ page: '_page' });
+      const parser = httpParserGenerator({ page: '_page', maxPage: 'max_page' });
       expect(parser({ _page: 42})).toEqual({ page: 42 })
     })
 
@@ -208,7 +208,6 @@ describe("Generators Unit Testing", () => {
       expect(httpParserGenerator({})()).toEqual();
       expect(httpParserGenerator({})(null)).toEqual(null);
       expect(httpParserGenerator({page: '_page'})(undefined)).toEqual(undefined);
-      // expect(httpParserGenerator({page: '_page'})(null)).toEqual(null);
     })
   });
   describe('serializerGenerator', () => {
@@ -218,7 +217,7 @@ describe("Generators Unit Testing", () => {
     })
 
     it('should only parse specified field', () => {
-      const serializer = httpSerializerGenerator({ params: { page: '_page' } })
+      const serializer = httpSerializerGenerator({ params: { page: '_page', status: 'state' } })
       expect(serializer({ params: { page: 42, token: 'abcd' } }))
         .toEqual({ params: { _page: 42, token: 'abcd' } })
     })
@@ -237,7 +236,9 @@ describe("Generators Unit Testing", () => {
       expect(httpSerializerGenerator(undefined)({})).toEqual({});
       expect(httpSerializerGenerator({})({})).toEqual({});
       expect(httpSerializerGenerator({})()).toEqual();
+      expect(httpSerializerGenerator({})(0)).toEqual(0);
       expect(httpSerializerGenerator({a:{page:'_page'}})(undefined)).toEqual(undefined);
+      expect(httpSerializerGenerator({a:{page:'_page'}})({ params: null })).toEqual({ params: null });
     })
 
   })
