@@ -11,7 +11,7 @@ import {
   httpRequestGenerator,
 } from "./generators";
 
-describe("Generators Unit Testing", () => {
+describe("ReduxRS Generators Unit Test", () => {
   describe("actionGenerators", () => {
     it("actionTypeGenerator should generate a formatted string type", () => {
       expect(actionTypeGenerator("test", "redux")).toEqual("TEST_REDUX");
