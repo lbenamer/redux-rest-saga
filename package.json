@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "browser": "./src/index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "build": "webpack"
   },
   "dependencies": {
     "axios": "0.20.0",
@@ -28,5 +29,13 @@
   "bugs": {
     "url": "https://github.com/lbenamer/redux-rest-saga/issues"
   },
-  "homepage": "https://github.com/lbenamer/redux-rest-saga#readme"
+  "homepage": "https://github.com/lbenamer/redux-rest-saga#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.0.0",
+    "webpack-node-externals": "^2.5.2"
+  }
 }
