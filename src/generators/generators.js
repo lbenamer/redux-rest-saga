@@ -29,7 +29,7 @@ export const selectorGenerator = (field, path) => (state) => {
   const fullPath = path ? `${path}.${field}` : field;
   return fullPath
     .split(".")
-    .reduce((acc, curr) => (acc && acc[curr] ? acc[curr] : null), state);
+    .reduce((acc, curr) => (acc && acc[curr] !== undefined ? acc[curr] : null), state);
 };
 
 /* Saga */

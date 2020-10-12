@@ -7,7 +7,7 @@ import {
   httpFactory,
 } from "../factories";
 
-/*  request def
+/*  request types TODO: ts.
 ActionStartType = {
     params: {},
     body: {}
@@ -60,7 +60,7 @@ export const fetchTemplate = (nameSpace, request, reducerPath) => {
           case fetchAction.push.type:
             return [action.data, ...state];
           case fetchAction.remove.type:
-            return state.filter((item) => item !== action.data); // should use lodash isEqual
+            return state.filter((item) => item !== action.data); // should use lodash isEqual or equivalent
           default:
             return state;
         }

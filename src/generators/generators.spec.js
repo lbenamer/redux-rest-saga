@@ -69,10 +69,16 @@ describe("ReduxRS Generators Unit Test", () => {
       const state = { count: 42 };
       const selector = selectorGenerator("count");
 
-      expect(typeof selector).toEqual("function");
       expect(selector(state)).toEqual(42);
       expect(selector({})).toEqual(null);
       expect(selector()).toEqual(null);
+    })
+
+    it('should select false state value', () => {
+      const state = { isLoading: false };
+      const selector = selectorGenerator("isLoading");
+
+      expect(selector(state)).toEqual(false);
     })
 
     it("should access nested state level", () => {
