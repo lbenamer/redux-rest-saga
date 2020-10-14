@@ -110,7 +110,7 @@ describe("ReduxRS Factories Unit Test", () => {
   })
 
   it('should parse axios error', () => {
-    const error = {
+    const fakeError = {
       message: 'error message',
       errorStatus: 404,
       extraInfo: 'blabla',
@@ -118,10 +118,9 @@ describe("ReduxRS Factories Unit Test", () => {
         content: 'json'
       }
     };
-
-    const formattedError = httpErrorParser(error);
-    expect(formattedError).toEqual({
-      messsage: 'error message',
+    const formattedError = httpErrorParser(fakeError);
+    expect(formattedError).toMatchObject({
+      message: 'error message',
       log: {
         errorStatus: 404,
         extraInfo: 'blabla',

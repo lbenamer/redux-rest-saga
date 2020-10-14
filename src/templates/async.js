@@ -41,6 +41,7 @@ export const asyncTemplate = (actionName, nameSpace, request, reducerPath) => {
           asyncAction.failed.type,
         ].includes(action),
       mutation: (state, action) => action.type === asyncAction.start.type,
+      init: false,
     },
   };
   const asyncReducer = reducerFactory(reducer);
