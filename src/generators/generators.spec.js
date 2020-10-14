@@ -11,7 +11,7 @@ import {
   httpRequestGenerator,
 } from "./generators";
 
-describe("Generators Unit Testing", () => {
+describe("ReduxRS Generators Unit Test", () => {
   describe("actionGenerators", () => {
     it("actionTypeGenerator should generate a formatted string type", () => {
       expect(actionTypeGenerator("test", "redux")).toEqual("TEST_REDUX");
@@ -69,10 +69,16 @@ describe("Generators Unit Testing", () => {
       const state = { count: 42 };
       const selector = selectorGenerator("count");
 
-      expect(typeof selector).toEqual("function");
       expect(selector(state)).toEqual(42);
       expect(selector({})).toEqual(null);
       expect(selector()).toEqual(null);
+    })
+
+    it('should select false state value', () => {
+      const state = { isLoading: false };
+      const selector = selectorGenerator("isLoading");
+
+      expect(selector(state)).toEqual(false);
     })
 
     it("should access nested state level", () => {

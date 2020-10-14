@@ -46,11 +46,12 @@ export const selectorFactory = (keys, path) => {
 
 /* Saga */
 export const sagaFactory = (actionType, saga) => {
-const actionSaga = actionSagaGenerator(saga);
-return sagaGenerator(actionType, actionSaga);
+  const actionSaga = actionSagaGenerator(saga);
+  return sagaGenerator(actionType, actionSaga);
 };
-  /* Http */
-const httpErrorParser = (error) => ({
+
+/* Http */
+export const httpErrorParser = (error) => ({
   message: error.message,
   log: JSON.parse(JSON.stringify(error)),
 });
@@ -63,14 +64,3 @@ export const httpFactory = (request) => ({
     request.serializer : httpSerializerGenerator(request.serializer),
   errorParser: request.errorParser || httpErrorParser,
 });
-
-
-// DEPRECATED ??
-export const exposedActionFactory = ({ id, params, body }, event) =>
-  event({
-    payload: {
-      ...(id && { id }),
-      ...(params && { params }),
-      ...(body & { body })
-    }
-  });

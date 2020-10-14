@@ -29,7 +29,7 @@ export const selectorGenerator = (field, path) => (state) => {
   const fullPath = path ? `${path}.${field}` : field;
   return fullPath
     .split(".")
-    .reduce((acc, curr) => (acc && acc[curr] ? acc[curr] : null), state);
+    .reduce((acc, curr) => (acc && acc[curr] !== undefined ? acc[curr] : null), state);
 };
 
 /* Saga */
@@ -56,7 +56,7 @@ export const httpRequestGenerator = (request) => ({ id, params, body } = {}) =>
 export const httpParserGenerator = (parser = {}) => (res) =>
   Object.entries(parser).reduce((acc, [key, value]) => {
     if (!res) return res;
-    if (res[value] || res[value] === 0) acc[key] = res[value];
+    if (res[value] !== undefined) acc[key] = res[value];
     delete acc[value];
     return acc;
   }, res);
@@ -64,7 +64,7 @@ export const httpParserGenerator = (parser = {}) => (res) =>
 export const serializerGenerator = (serializer) => (payload) =>
   Object.entries(serializer).reduce((acc, [key, value]) => {
     if (!payload) return payload;
-    if (payload[key] || payload[key] === 0) acc[value] = payload[key];
+    if (payload[key] !== undefined) acc[value] = payload[key];
     delete acc[key];
     return acc;
   }, payload);
