@@ -5,6 +5,7 @@ import {
   reducerFactory,
   selectorFactory,
   httpFactory,
+  httpErrorParser,
 } from "./factories";
 
 describe("ReduxRS Factories Unit Test", () => {
@@ -73,6 +74,61 @@ describe("ReduxRS Factories Unit Test", () => {
       expect(selector.content(store)).toEqual('some data');
       expect(selector.count(store)).toEqual(42);
       expect(selector.isLoading(store)).toEqual(false);
+    })
+  });
+
+  describe('sagaFactory', () => {
+    const saga = sagaFactory('TEST_SAGA', () => 'hello');
+
+    expect(typeof saga).toEqual("function")
+    expect(saga.constructor.name).toEqual("GeneratorFunction");
+  })
+
+  describe('httpFactory', () => {
+    it('should generate a default http object', () => {
+      const http = httpFactory({});
+
+      expect(typeof http.request).toEqual("function");
+      expect(typeof http.parser).toEqual("function");
+      expect(typeof http.serializer).toEqual("function");
+      expect(typeof http.errorParser).toEqual("function");
+    })
+
+    it('shoud return a custom http object', () => {
+      const http = httpFactory({
+        request: () => ({}),
+        parser: () => ({}),
+        serializer: () => ({}),
+        errorParser: () => ({})
+      })
+
+      expect(typeof http.request).toEqual("function");
+      expect(typeof http.parser).toEqual("function");
+      expect(typeof http.serializer).toEqual("function");
+      expect(typeof http.errorParser).toEqual("function");
+    })
+  })
+
+  it('should parse axios error', () => {
+    const error = {
+      message: 'error message',
+      errorStatus: 404,
+      extraInfo: 'blabla',
+      responseHeaders: {
+        content: 'json'
+      }
+    };
+
+    const formattedError = httpErrorParser(error);
+    expect(formattedError).toEqual({
+      messsage: 'error message',
+      log: {
+        errorStatus: 404,
+        extraInfo: 'blabla',
+        responseHeaders: {
+          content: 'json'
+        }
+      }
     })
   })
 

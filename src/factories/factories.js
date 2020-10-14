@@ -51,7 +51,7 @@ export const sagaFactory = (actionType, saga) => {
 };
 
 /* Http */
-const httpErrorParser = (error) => ({
+export const httpErrorParser = (error) => ({
   message: error.message,
   log: JSON.parse(JSON.stringify(error)),
 });
