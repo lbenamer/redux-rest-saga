@@ -2,6 +2,9 @@
 ![npm](https://img.shields.io/npm/v/redux-rest-saga)
 ![GitHub file size in bytes](https://img.shields.io/github/size/lbenamer/redux-rest-saga/src/index.js)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/react-redux-saga)
+[![lbenamer](https://circleci.com/gh/lbenamer/redux-rest-saga.svg?style=svg)](<https://app.circleci.com/pipelines/github/lbenamer/redux-rest-saga/5/workflows/74e44575-694b-4ca2-9157-c92915b11e9f/jobs/5>)
+
+
 
 ### Install
 ```bash
