@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "browser": "./src/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "build": "webpack",
     "dev": "jest --watchAll"
   },
